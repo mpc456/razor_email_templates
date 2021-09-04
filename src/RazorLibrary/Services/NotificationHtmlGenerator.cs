@@ -1,4 +1,5 @@
-﻿using RazorLibrary.Model;
+﻿using RazorLibrary.Interfaces;
+using RazorLibrary.Model;
 using RazorLight;
 using System;
 using System.Collections.Generic;
@@ -10,30 +11,19 @@ using System.Threading.Tasks;
 
 namespace RazorLibrary.Services
 {
-    public class NotificationHtmlGenerator
+    public class NotificationHtmlGenerator : IHtmlGenerator<NotificationModel>
     {
-        public async Task<string> Create(NotificationModel model)
+        private readonly IRazorEngine _engine;
+
+        public NotificationHtmlGenerator(IRazorEngine engine)
         {
-            var engine = new RazorLightEngineBuilder()
-                .UseFileSystemProject(Directory.GetCurrentDirectory())
-                .UseMemoryCachingProvider()
-                .Build();
-
-            var template = File.ReadAllText("Templates/Notification.cshtml");
-
-            return await engine.CompileRenderStringAsync<NotificationModel>(GetHashString(template), template, model, null);
+            _engine = engine;
         }
 
-        public static string GetHashString(string inputString)
+        public async Task<string> Create(NotificationModel model)
         {
-            var sb = new StringBuilder();
-            var hashbytes = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(inputString));
-            foreach (byte b in hashbytes)
-            {
-                sb.Append(b.ToString("X2"));
-            }
-
-            return sb.ToString();
+            var template = File.ReadAllText("Templates/Notification.cshtml");
+            return await _engine.CompileHtml<NotificationModel>(template, model);
         }
     }
 }

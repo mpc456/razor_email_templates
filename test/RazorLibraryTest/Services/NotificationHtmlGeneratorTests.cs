@@ -11,7 +11,7 @@ namespace RazorLibraryTest.Services
         [Fact]
         public async Task CanCreateNotificationEmail()
         {
-            var service = new NotificationHtmlGenerator();
+            var service = new NotificationHtmlGenerator(new RazorEngine());
 
             var model = new NotificationModel
             {

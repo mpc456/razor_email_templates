@@ -1,0 +1,8 @@
+﻿@model RazorLibrary.Model.NotificationCollection
+
+@foreach (var notification in @Model.Notifications)
+{
+    <h2>Dear @notification.Name, you have a notification.</h2>
+    <h1>@notification.Title</h1>
+    <p>@notification.Content</p>
+}
