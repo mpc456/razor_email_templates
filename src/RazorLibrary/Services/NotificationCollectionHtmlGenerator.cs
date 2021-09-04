@@ -20,4 +20,20 @@ namespace RazorLibrary.Services
             return await _engine.CompileHtml<NotificationCollection>(template, model);
         }
     }
+
+    public class NotificationCollectionTableHtmlGenerator : IHtmlGenerator<NotificationCollection>
+    {
+        private readonly IRazorEngine _engine;
+
+        public NotificationCollectionTableHtmlGenerator(IRazorEngine engine)
+        {
+            _engine = engine;
+        }
+
+        public async Task<string> Create(NotificationCollection model)
+        {
+            var template = File.ReadAllText("Templates/NotificationCollectionTable.cshtml");
+            return await _engine.CompileHtml<NotificationCollection>(template, model);
+        }
+    }
 }

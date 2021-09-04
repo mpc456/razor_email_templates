@@ -1,8 +1,36 @@
 ﻿@model RazorLibrary.Model.NotificationCollection
 
-@foreach (var notification in @Model.Notifications)
-{
-    <h2>Dear @notification.Name, you have a notification.</h2>
-    <h1>@notification.Title</h1>
-    <p>@notification.Content</p>
-}
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+    #notifications table, th, td {
+        border: 1px solid black;
+    }
+</style>
+</head>
+
+<body>
+
+    <table id="notifications">
+
+        <tr>
+            <td>Name</td>
+            <td>Title</td>
+            <td>Content</td>
+        </tr>
+
+        @foreach (var notification in @Model.Notifications)
+        {
+    <tr>
+        <td>@notification.Name</td>
+        <td>@notification.Title</td>
+        <td>@notification.Content</td>
+    </tr>
+        }
+
+    </table>
+
+</body>
+</html>
