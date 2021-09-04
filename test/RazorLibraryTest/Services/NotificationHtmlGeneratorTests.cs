@@ -4,7 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RazorLibraryTest
+namespace RazorLibraryTest.Services
 {
     public class NotificationHtmlGeneratorTests
     {
